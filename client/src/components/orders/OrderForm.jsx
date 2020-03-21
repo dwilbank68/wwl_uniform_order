@@ -1,4 +1,6 @@
 import React, { Component } from 'react';
+import { StickyContainer, Sticky } from 'react-sticky';
+
 import _ from 'lodash';
 // import {reduxForm} from 'redux-form';
 import OrderRow from './OrderRow.jsx';
@@ -9,7 +11,12 @@ import PRODUCTS from '../../constants/productLinks.js';
 const styles = {
     form_wrapper: { display: 'flex'},
     left: {flex:3, padding: '5px'},
-    right: {flex:2, padding: '5px'}
+    right: {
+        flex:2,
+        display: 'flex',
+        alignItems: 'center',
+        justifyContent: 'center'
+    }
 }
 // const validate = v => {	
 //     // v is the formValues
@@ -115,16 +122,18 @@ class OrderForm extends Component {
                 </div>
             
                 <div style={styles.right}>
-                    <OrderSummary   cartState={this.state}
-                                    removeItem={this.removeItem}
-                                    // showTable={!_.isEmpty(this.state)}/>
-                                    showTable={true}/>
-
-                    <div style={{textAlign: 'center', paddingBottom:'15px', paddingTop:'15px'}}>
-                        <button className="btn-flat btn-med green white-text"
-                                onClick={this.handleSubmit}>
-                            Submit
-                        </button>
+                    <div style={{width:'90%'}}>
+                        <OrderSummary   cartState={this.state}
+                                        removeItem={this.removeItem}
+                                        // showTable={!_.isEmpty(this.state)}/>
+                                        showTable={true}/>
+                        <div style={{textAlign: 'center', paddingBottom:'15px', paddingTop:'15px'}}>
+                            <button className="btn-flat btn-med"
+                                    onClick={this.handleSubmit}
+                                    style={{fontFamily:'Montserrat, sans-serif', backgroundColor:'#333', color:'white'}}>
+                                Submit
+                            </button>
+                        </div>
                     </div>
                 </div>
 

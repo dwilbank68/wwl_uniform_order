@@ -6,17 +6,18 @@ import './OrderSummary.css';
 const styles = {
     deleteButton: {
         textAlign:'center',
-        color:'#ccc',
-        hover: {
-            cursor:'pointer'
-        }
+        color:'#ccc'
+    },
+    OrderSummary: {
+        backgroundColor: 'white',
+        border: '1px solid #eee',
+        borderRadius: '5px',
+        fontFamily: 'Open Sans, sans-serif'
     },
     OrderSummaryItem: {
-        backgroundColor: 'white',
-        border: '1px solid #ddd',
-        borderRadius: '5px',
+        border: '1px solid #eee',
         fontSize: '11px',
-        fontFamily: 'Courier'
+        textAlign: 'center'
     }
 }
 
@@ -39,13 +40,12 @@ export default
                             {name}
                         </a>    
                     </td>
-                    <td style={{textAlign:'center'}}>{size}</td>
-                    <td style={{textAlign:'center'}}>{points}</td>
-                    <td style={{textAlign:'center'}}>{count}</td>
-                    <td style={{textAlign:'center'}}>{points * count}</td>
+                    <td style={styles.OrderSummaryItem}>{size}</td>
+                    <td style={styles.OrderSummaryItem}>{points}</td>
+                    <td style={styles.OrderSummaryItem}>{count}</td>
+                    <td style={styles.OrderSummaryItem}>{points * count}</td>
                     <td className='deleteButton'
-                        onClick={e => removeItem(e, key)}
-                        style={styles.deleteButton}>
+                        onClick={e => removeItem(e, key)}>
                         &#x2715;
                     </td>
                 </tr>
@@ -56,12 +56,13 @@ export default
     return (
         <div>
             {showTable &&
-            <div style={styles.OrderSummaryItem}>
+            <div style={styles.OrderSummary}>
                 <table className="striped">
-                    <thead style={{height:'24px', fontSize:'14px', backgroundColor:'#CCC'}}>
+                    <thead style={{height:'24px', fontSize:'14px',
+                            backgroundColor:'#CCC', fontFamily:'Montserrat, sans-serif'}}>
                         <tr>
-                            <th>Item</th>
-                            <th>Size</th>
+                            <th style={{textAlign:'center'}}>Item</th>
+                            <th style={{textAlign:'center'}}>Size</th>
                             <th style={{textAlign:'center'}}>Pts</th>
                             <th style={{textAlign:'center'}}>Count</th>
                             <th style={{textAlign:'center'}}>SubTotal</th>

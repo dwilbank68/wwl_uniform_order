@@ -21,6 +21,7 @@ export default
         const selectStyles = {
             control: (provided, state) => ({
                 ...provided,
+                fontFamily: 'Open Sans, sans-serif',
                 fontSize: 12,
                 height: 24,
                 width: 80
@@ -31,6 +32,10 @@ export default
             }),
             indicatorSeparator: base => ({
                 ...base, display:'none'
+            }),
+            menu: base => ({
+                ...base,
+                fontFamily: 'Open Sans, sans-serif'
             }),
             option: (provided, state) => ({
                 ...provided,

@@ -19,9 +19,10 @@ export default ({handleCount, handleSize, lastSizeChosen='', product}) => {
     const {code, color, image, name, points, sizes} = product;
 
     const styles = {
-        codebox: {width:'40px', fontSize:'12px'},
+        codebox: {width:'40px', fontSize:'12px', fontFamily: 'Montserrat, sans-serif'},
         img: { height:'50px', width:'40px'},
-        namebox: {fontSize:'12px'},
+        namebox: {fontSize:'12px', fontFamily: 'Open Sans, sans-serif'},
+        pointsbox: {fontSize:'10px', fontFamily: 'Open Sans, sans-serif'},
         numInput: { marginRight: '10px'}
     }
 
@@ -45,7 +46,7 @@ export default ({handleCount, handleSize, lastSizeChosen='', product}) => {
             
             <div className='codeBox' style={styles.codebox}>{code}</div>
             <div className='nameBox' style={styles.namebox}>{name}</div>
-            <div className='pointsBox'>{points} pts</div>
+            <div className='pointsBox' style={styles.pointsbox}>{points} pts</div>
 
             <div className='dropdown'>
                 <OrderSizeDropDown  product={product}
@@ -56,6 +57,7 @@ export default ({handleCount, handleSize, lastSizeChosen='', product}) => {
             <div className='numberBox'>
                 {<NumericInput  className='form-control'
                                 data-item={code}
+                                style={{input:{fontFamily: 'OpenSans, sans-serif'}}}
                                 disabled={numericInputDisabled()}
                                 min={0} max={25}
                                 name={`${code}_count`}
