@@ -18,10 +18,17 @@ const strategyObj = {
 const OAuthCallback = async (accessToken, refreshToken, profile, done) => {
     // this is called by passport when google sends back the
     // final token(s) and user profile
-    const existingUser = await User.findOne({googleId: profile.id});
+    const {id, displayName, emails, photos} = profile;
+    console.log({id, displayName, emails, photos});
+    const existingUser = await User.findOne({googleId: id});
     if (existingUser) return done(null, existingUser);
         // serializeUser called with existingUser
-    const user = await new User({googleId:profile.id}).save()
+    const user = await new User({
+        googleId:id,
+        name:displayName,
+        email:emails[0].value,
+        photo:photos[0].value
+    }).save()
     done(null, user);
         // serializeUser called with user
 }
@@ -38,7 +45,9 @@ passport.deserializeUser((id, done) => {
     // it can be attached as req.user
     User
         .findById(id)
-        .then(user => done(null, user))
+        .then(user => {
+            done(null, user)
+        })
     
 })
 

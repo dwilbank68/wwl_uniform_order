@@ -1,10 +1,10 @@
 import React, { Component } from 'react';
-import { StickyContainer, Sticky } from 'react-sticky';
+import {connect} from 'react-redux';
 
 import _ from 'lodash';
 // import {reduxForm} from 'redux-form';
 import OrderRow from './OrderRow.jsx';
-import OrderRow_UniFitItem from './OrderRow_UniFitItem.jsx';
+import OrderRowUniFitItem from './OrderRowUniFitItem.jsx';
 import OrderSummary from './OrderSummary.jsx';
 import PRODUCTS from '../../constants/productLinks.js';
 
@@ -18,22 +18,6 @@ const styles = {
         justifyContent: 'center'
     }
 }
-// const validate = v => {	
-//     // v is the formValues
-//     const errors = {};
-//     if (!v.title) errors.title = 'Enter a title';
-//     if (!v.categories) errors.categories = 'Enter a category';
-//     if (!v.content) errors.content = 'Enter some content';
-//     return errors;									// if 'errors' is still empty, the form will submit
-// }
-
-// const formOptions = {
-//     form: 'orderForm',
-//     destroyOnUnmount: false
-//     // validate
-// }
-
-
 
 class OrderForm extends Component {
 
@@ -77,7 +61,14 @@ class OrderForm extends Component {
 
     handleSubmit = e => {
         e.preventDefault();
-        console.log(JSON.stringify(this.state , null, 2));
+        console.log('auth', this.props.auth);
+        const {name, email, _id} = this.props.auth;
+        const submitObj = {
+            ...this.state,
+            name, email, _id
+        }
+        // this.setState({auth:this.props.auth})
+        console.log(JSON.stringify(submitObj , null, 2));
     }
 
     isUniFitItem = productCode => {
@@ -100,7 +91,7 @@ class OrderForm extends Component {
                                     size={this.state.pendingSize}/>
                     )
                     return (
-                        <OrderRow_UniFitItem    code={k}
+                        <OrderRowUniFitItem    code={k}
                                                 handleChange={this.handleChange}
                                                 handleCount={this.handleCount}
                                                 key={i}
@@ -130,7 +121,7 @@ class OrderForm extends Component {
                         <div style={{textAlign: 'center', paddingBottom:'15px', paddingTop:'15px'}}>
                             <button className="btn-flat btn-med"
                                     onClick={this.handleSubmit}
-                                    style={{fontFamily:'Montserrat, sans-serif', backgroundColor:'#333', color:'white'}}>
+                                    style={{fontFamily:'Montserrat, sans-serif', backgroundColor:'#00a787', color:'white'}}>
                                 Submit
                             </button>
                         </div>
@@ -143,4 +134,8 @@ class OrderForm extends Component {
     }
 }
 
-export default OrderForm;
+const mapStateToProps = ({auth}, ownProps) => ({
+    auth
+});
+
+export default connect(mapStateToProps)(OrderForm);

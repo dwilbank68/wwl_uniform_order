@@ -16,29 +16,28 @@ NumericInput.style.input.width = '74px';
 
 
 export default ({handleCount, handleSize, lastSizeChosen='', product}) => {
-    const {code, color, image, name, points, sizes} = product;
+    const {code, color, image, name, points} = product;
 
     const styles = {
         codebox: {width:'40px', fontSize:'12px', fontFamily: 'Montserrat, sans-serif'},
         img: { height:'50px', width:'40px'},
-        namebox: {fontSize:'12px', fontFamily: 'Open Sans, sans-serif'},
-        pointsbox: {fontSize:'10px', fontFamily: 'Open Sans, sans-serif'},
+        namebox: {fontSize:'12px',
+            fontFamily: 'Open Sans, sans-serif',
+            padding: '6px 0 6px 6px', 'backgroundColor':color},
+        pointsbox: {fontSize:'10px', fontFamily: 'Open Sans, sans-serif', textAlign:'center'},
         numInput: { marginRight: '10px'}
     }
 
     const numericInputDisabled = () => {
-        // console.log({code});
         const uni_fit_items = ['90CL','90DM','90BG','90DB','90BW'];
         const is_regular_item = !uni_fit_items.includes(code);
         const noSizeChosen = lastSizeChosen.split('_')[0] !== code;
-        // console.log({is_regular_item});
-        // console.log({noSizeChosen});
         if (!is_regular_item) return false;
         if (noSizeChosen) return true;
     }
 
     return (
-        <div className='wrapper' style={{'backgroundColor':color}}>
+        <div className='wrapper' style={{backgroundColor:'white'}}>
 
             <div    className='imgBox'>
                 <img src={image} alt={code} style={styles.img}/>

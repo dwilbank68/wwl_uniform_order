@@ -3,9 +3,6 @@ const {Path} = require('path-parser');
 const {URL} = require('url');
 const mongoose = require('mongoose');
 const requireLogin = require('../middleware/requireLogin.js');
-const requireCredits = require('../middleware/requireCredits.js');
-const Mailer = require('../services/Mailer.js');
-const surveyTemplate = require('../services/emailTemplates/surveyTemplate.js');
 
 const Survey = mongoose.model('surveys')
 
@@ -28,7 +25,6 @@ module.exports = (app) => {
     app.post(
         '/api/surveys',
         requireLogin,
-        requireCredits,
         async (req, res) => {
             const {title, subject, body, recipients} = req.body;
             const survey = new Survey({
@@ -50,30 +46,4 @@ module.exports = (app) => {
         }
     )
 
-    app.post('/api/surveys/webhooks', (req,res) => {
-        const p = new Path('/api/surveys/:surveyId/:choice');
-        _.chain(req.body)
-            .map(({email, url}) => {
-                const pathname = new URL(url).pathname;
-                const match = (p.test(pathname));
-                const {surveyId, choice} = match;
-                if (match) return {email, surveyId, choice};
-            })
-            .compact()
-            .uniqBy('email', 'surveyId')
-            .each(({surveyId, email, choice}) => {
-                const queryObj = {
-                    _id: surveyId,
-                    recipients: { $elemMatch: { email: email, responded: false }}
-                };
-                const changeObj = {
-                    $inc: { [choice]: 1 },
-                    $set: { 'recipients.$.responded': true },
-                    lastResponded: new Date()
-                };
-                Survey.updateOne(queryObj, changeObj).exec();
-            })
-            .value();
-        res.send({});
-    })
 }

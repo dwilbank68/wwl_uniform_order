@@ -14,6 +14,7 @@ class OrderNew extends Component {
                             frameBorder="0"
                             webkitallowfullscreen="true"
                             mozallowfullscreen="true"
+                            title="wwl_video"
                             allowFullScreen>
                     </iframe>
                 </div>

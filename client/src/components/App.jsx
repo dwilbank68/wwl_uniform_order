@@ -14,7 +14,7 @@ import OrderNew from './orders/OrderNew.jsx';
 // import './App.css';
 const styles = {
     mainContainer: {
-        margin:'20px 50px'
+        margin:'70px 50px'
     } 
 }
 

@@ -10,7 +10,3 @@ materializecss
 
     git push heroku master
 
-    https://app.sendgrid.com/settings/mail_settings
-        Event Notification
-            HTTP POST URL
-                https://emaily-wilbanks.herokuapp.com/surveys/webhooks
