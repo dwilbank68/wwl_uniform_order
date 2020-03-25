@@ -1,12 +1,12 @@
 import React from 'react';
 import PRODUCTS from '../../constants/productLinks.js';
-// import OrderSummaryItem from './OrderSummaryItem';
 import './OrderSummary.css';
 
 const styles = {
     deleteButton: {
         textAlign:'center',
-        color:'#ccc'
+        color:'#ccc',
+        fontSize:'9px'
     },
     OrderSummary: {
         backgroundColor: 'white',
@@ -45,6 +45,7 @@ export default
                     <td style={styles.OrderSummaryItem}>{count}</td>
                     <td style={styles.OrderSummaryItem}>{points * count}</td>
                     <td className='deleteButton'
+                        style={styles.deleteButton}
                         onClick={e => removeItem(e, key)}>
                         &#x2715;
                     </td>

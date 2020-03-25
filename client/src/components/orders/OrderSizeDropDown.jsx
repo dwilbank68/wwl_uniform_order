@@ -11,9 +11,6 @@ export default
         .keys(sizes)
         .map(s => {
             const label = s.split('_')[1];
-            // console.log('---------------------');
-            // console.log("chosenSize", chosenSize);
-            // console.log('---------------------');
             return {value:s, label};
             // return s;
         })

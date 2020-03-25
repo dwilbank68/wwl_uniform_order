@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 	
 import { connect } from 'react-redux';
     
-import {fetchSurveys} from '../actions/index.js';
+// import {fetchSurveys} from '../actions/index.js';
 // import {ACTION_CONST1, ACTION_CONST2} from '../actions';
 	
 // import { bindActionCreators } from 'redux';
@@ -17,7 +17,7 @@ class SurveyList extends Component {
     //    this.handleClick = this.handleClick.bind(this)
     // }
     componentDidMount() {
-        this.props.fetchSurveys();
+        // this.props.fetchSurveys();
     }
     
     // state = { whatever: false }; // if using create-react-app
@@ -45,27 +45,27 @@ class SurveyList extends Component {
     //    })
     // }
     
-    renderSurveys = () => {
-        return this.props.surveys.reverse().map(survey => (
-            <div    className="card blue-grey darken-1 white-text"
-                    key={survey._id}>
-                <div className="card-content">
-                    <span className="card-title">{survey.title}</span>
-                    <p>{survey.body}</p>
-                    <p className="right">Sent On: {new Date(survey.dateSent).toLocaleDateString()}</p>
-                </div>
-                <div className="card-action">
-                    <a href="#">Yes: {survey.yes}</a>
-                    <a href="#">No: {survey.no}</a>
-                </div>
-            </div>
-        ))
-    }
+    // renderSurveys = () => {
+    //     return this.props.surveys.reverse().map(survey => (
+    //         <div    className="card blue-grey darken-1 white-text"
+    //                 key={survey._id}>
+    //             <div className="card-content">
+    //                 <span className="card-title">{survey.title}</span>
+    //                 <p>{survey.body}</p>
+    //                 <p className="right">Sent On: {new Date(survey.dateSent).toLocaleDateString()}</p>
+    //             </div>
+    //             <div className="card-action">
+    //                 <a href="http://nowhere.com">Yes: {survey.yes}</a>
+    //                 <a href="http://nowhere.com">No: {survey.no}</a>
+    //             </div>
+    //         </div>
+    //     ))
+    // }
 
     render() {
         return (
             <div className="">
-                {this.renderSurveys()}
+                {/* {this.renderSurveys()} */}
             </div>
         );
     }
@@ -117,7 +117,8 @@ const mapStateToProps = ({surveys}) => ({
 // }
 // (lets you do 'this.context.router.push('/wherever');
 	
-export default connect(mapStateToProps, {fetchSurveys})(SurveyList);
+// export default connect(mapStateToProps, {fetchSurveys})(SurveyList);
+export default connect(mapStateToProps)(SurveyList);
 	
 // export default connect(null, actions)(SurveyList);         // 5
 // export default connect(mapStateToProps, () => ({}))(SurveyList);

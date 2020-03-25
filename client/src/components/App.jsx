@@ -6,7 +6,7 @@ import * as actions from '../actions/index.js';
 import Dashboard from './Dashboard.jsx';                                              
 import Header from './Header.jsx';                                              
 import Landing from './Landing.jsx';                                              
-import SurveyNew from './surveys/SurveyNew.jsx';                                              
+// import SurveyNew from './surveys/SurveyNew.jsx';                                              
 import OrderNew from './orders/OrderNew.jsx';
 
 
@@ -21,7 +21,7 @@ const styles = {
 function App({fetchUser}) {
 	useEffect(
         () => {fetchUser()},
-        []
+        [fetchUser]
     )	
 
     return (
@@ -32,8 +32,8 @@ function App({fetchUser}) {
                     <Header/>
                     <Switch>
                         <Route exact path="/" component={Landing} />
-                        <Route exact path="/surveys" component={Dashboard} />
-                        <Route exact path="/surveys/new" component={SurveyNew} />
+                        <Route exact path="/orders" component={Dashboard} />
+                        {/* <Route exact path="/surveys/new" component={SurveyNew} /> */}
                         <Route exact path="/orders/new" component={OrderNew} />
                     </Switch>
                 </div>

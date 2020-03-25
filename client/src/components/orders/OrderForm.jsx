@@ -1,12 +1,13 @@
 import React, { Component } from 'react';
+import {withRouter} from 'react-router-dom';
 import {connect} from 'react-redux';
 
-import _ from 'lodash';
-// import {reduxForm} from 'redux-form';
+// import _ from 'lodash';
 import OrderRow from './OrderRow.jsx';
 import OrderRowUniFitItem from './OrderRowUniFitItem.jsx';
 import OrderSummary from './OrderSummary.jsx';
 import PRODUCTS from '../../constants/productLinks.js';
+import {submitOrder} from '../../actions/index.js';
 
 const styles = {
     form_wrapper: { display: 'flex'},
@@ -39,7 +40,7 @@ class OrderForm extends Component {
         const item = element.dataset.item;
         const unifit_items = ['90CL','90DM','90BG','90DB','90BW'];
         const is_unifit_item = unifit_items.includes(item);
-        if (is_unifit_item) this.lastSizeChosen = `${item}_Uni-fit`;
+        if (is_unifit_item) this.lastSizeChosen = `${item}_Uni-Fit`;
         if (this.lastSizeChosen.split('_')[0] === item) {
             if (num === 0) {
                 const newState = this.state;
@@ -61,14 +62,15 @@ class OrderForm extends Component {
 
     handleSubmit = e => {
         e.preventDefault();
-        console.log('auth', this.props.auth);
         const {name, email, _id} = this.props.auth;
         const submitObj = {
             ...this.state,
             name, email, _id
         }
+        // history put on the props via the imported 'withRouter'
+        this.props.submitOrder(submitObj, this.props.history);
         // this.setState({auth:this.props.auth})
-        console.log(JSON.stringify(submitObj , null, 2));
+        // console.log(JSON.stringify(submitObj , null, 2));
     }
 
     isUniFitItem = productCode => {
@@ -121,6 +123,14 @@ class OrderForm extends Component {
                         <div style={{textAlign: 'center', paddingBottom:'15px', paddingTop:'15px'}}>
                             <button className="btn-flat btn-med"
                                     onClick={this.handleSubmit}
+                                    // onClick={() => {
+                                    //     const {name, email, _id} = this.props.auth;
+                                    //     const submitObj = {
+                                    //         ...this.state,
+                                    //         name, email, userId:_id
+                                    //     }
+                                    //     this.props.submitOrder(submitObj, this.props.history)}
+                                    // }
                                     style={{fontFamily:'Montserrat, sans-serif', backgroundColor:'#00a787', color:'white'}}>
                                 Submit
                             </button>
@@ -138,4 +148,4 @@ const mapStateToProps = ({auth}, ownProps) => ({
     auth
 });
 
-export default connect(mapStateToProps)(OrderForm);
+export default connect(mapStateToProps, {submitOrder})(withRouter(OrderForm));

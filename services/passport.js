@@ -19,7 +19,6 @@ const OAuthCallback = async (accessToken, refreshToken, profile, done) => {
     // this is called by passport when google sends back the
     // final token(s) and user profile
     const {id, displayName, emails, photos} = profile;
-    console.log({id, displayName, emails, photos});
     const existingUser = await User.findOne({googleId: id});
     if (existingUser) return done(null, existingUser);
         // serializeUser called with existingUser

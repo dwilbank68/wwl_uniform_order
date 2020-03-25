@@ -1,8 +1,9 @@
 .logo {
-    background: url(WWL_250_x_55.png) no-repeat;
+    /* background: url(WWL_250_x_55.png) no-repeat; */
+    background: url(WWL_193x42.png) no-repeat;
     display: block;
     height: 60px;
     width: 260px;
-    margin-top: 4px;
+    margin-top: 10px;
     margin-left: 21px;
 }

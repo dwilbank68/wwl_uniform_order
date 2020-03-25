@@ -4,7 +4,8 @@ const cookieSession = require('cookie-session');
 const passport = require('passport');
 const bodyParser = require('body-parser');
 
-require('./models/Survey.js');
+require('./models/Order.js');
+// require('./models/Survey.js');
 require('./models/User.js');
 require('./services/passport.js');
 const keys = require('./config/keys.js')
@@ -28,7 +29,7 @@ app.use(bodyParser.json());
 
 // send the express app object to the authRoutes file
 require('./routes/authRoutes.js')(app);
-require('./routes/surveyRoutes.js')(app);
+require('./routes/orderRoutes.js')(app);
 
 if (process.env.NODE_ENV === 'production') {
     // if req comes in without recognizable route,

@@ -6,8 +6,6 @@ import './Header.css';
 
 const Header = ({auth}) => {
 
-    console.log({auth});
-
     const styles = {
         nav: {position:'absolute', left:'5px', top:'0px'},
         navbar_gray: {backgroundColor:'#00a787'},
@@ -39,7 +37,7 @@ const Header = ({auth}) => {
         <nav style={styles.nav}>
             <div    className="nav-wrapper"
                     style={styles.navbar_gray}>
-                <Link   to={auth ? '/surveys' : '/'}
+                <Link   to={auth ? '/orders' : '/'}
                         className="left logo"
                         style={{paddingLeft:'15px'}}>             
                 </Link>
@@ -51,7 +49,7 @@ const Header = ({auth}) => {
     );
 };
 
-const mapStateToProps = ({auth}, ownProps) => ({
+const mapStateToProps = ({auth}) => ({
     auth
 });
 

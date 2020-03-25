@@ -17,7 +17,7 @@ module.exports = (app) => {
         // send back accessToken to the 2nd arg of GoogleStrategy
         '/auth/google/callback',
         passport.authenticate('google'),
-        (req, res) => {res.redirect('/surveys')}
+        (req, res) => {res.redirect('/orders')}
     )
 
     app.get(
