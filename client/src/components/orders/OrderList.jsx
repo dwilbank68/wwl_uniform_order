@@ -2,7 +2,7 @@ import React, {useEffect} from 'react';
 import { connect } from 'react-redux';
 import {fetchOrders} from '../../actions/index.js';
 import PRODUCTS from '../../constants/productLinks.js';
-
+import moment from 'moment';
 	
 const OrderList = ({fetchOrders, auth, orders}) => {
     
@@ -13,9 +13,18 @@ const OrderList = ({fetchOrders, auth, orders}) => {
     
     
     const styles = {
-        row: {display:'flex'}
+        row: {display:'flex', fontFamily: 'Open Sans, sans-serif', borderBottom:'1px solid gray'},
+        rowItem: {display:'flex', fontFamily: 'Open Sans, sans-serif'},
+        namebox: {
+            fontSize:'12px',
+            fontFamily: 'Open Sans, sans-serif',
+            paddingRight: '30px',
+            textAlign:'left'
+        },
+        date: {fontSize:'9px', color:'gray'},
+        detailbox: {fontSize:'12px', textAlign:'center', margin:'0 5px', color:'inherit'}
     }
-    
+
     const renderOrder = () => {
         return orders.map((order,i) => {
             const items = [];
@@ -24,20 +33,26 @@ const OrderList = ({fetchOrders, auth, orders}) => {
             }
             return (
                 <div style={styles.row} key={i}>
-                    <div>{order.name}</div>
+                    <div style={styles.namebox}>
+                        <div>{order.name}</div>
+                        <div style={styles.date}>
+                            {moment(order.dateOrdered).format('YYYY-MM-DD, h:mma')}
+                        </div>
+                    </div>
                     <div>
                         {items.map((itemArr, i) => {
                             const [itemSize, count] = itemArr;
                             const [item, size] = itemSize.split('_');
                             return (
-                                <div style={styles.row} key={i}>
+                                <div style={styles.rowItem} key={i}>
                                     <a  href={PRODUCTS[item].sizes[itemSize]}
                                         target="_blank"
-                                        rel="noopener noreferrer">
+                                        rel="noopener noreferrer"
+                                        style={styles.detailbox}>
                                         {PRODUCTS[item].name}
                                     </a>
-                                    <div>{size}</div>
-                                    <div>{count}</div>
+                                    <div style={styles.detailbox}>{size}</div>
+                                    <div style={styles.detailbox}>({count})</div>
                                 </div>
                                 
                             )
