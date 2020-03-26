@@ -1,19 +1,20 @@
 import React, {useEffect} from 'react';
 import { connect } from 'react-redux';
-import {fetchOrders} from '../../actions/index.js';
+import {fetchOrders, markOrder} from '../../actions/index.js';
 import PRODUCTS from '../../constants/productLinks.js';
 import moment from 'moment';
 	
-const OrderList = ({fetchOrders, auth, orders}) => {
+const OrderList = ({fetchOrders, markOrder, auth, orders}) => {
     
     useEffect(
         () => {if (auth) fetchOrders(auth.admin)},
-        [auth]
+        [auth, fetchOrders, orders]
     )
     
     
     const styles = {
-        row: {display:'flex', fontFamily: 'Open Sans, sans-serif', borderBottom:'1px solid gray'},
+        orderListContainer: {marginTop: '100px', padding:'0 80px'},
+        row: {display:'flex', fontFamily: 'Open Sans, sans-serif', borderBottom:'1px solid gray', justifyContent:'space-between', alignItems:'center'},
         rowItem: {display:'flex', fontFamily: 'Open Sans, sans-serif'},
         namebox: {
             fontSize:'12px',
@@ -21,8 +22,9 @@ const OrderList = ({fetchOrders, auth, orders}) => {
             paddingRight: '30px',
             textAlign:'left'
         },
-        date: {fontSize:'9px', color:'gray'},
-        detailbox: {fontSize:'12px', textAlign:'center', margin:'0 5px', color:'inherit'}
+        date: {fontSize:'9px'},
+        detailbox: {fontSize:'12px', textAlign:'center', margin:'0 5px', color:'inherit'},
+        toggleOrderButton: {fontSize:'10px', textAlign:'center', color:'inherit', display:'flex'}
     }
 
     const renderOrder = () => {
@@ -32,7 +34,8 @@ const OrderList = ({fetchOrders, auth, orders}) => {
                 items.push([key, order.items[key]])
             }
             return (
-                <div style={styles.row} key={i}>
+                <div    style={order.processed ? {...styles.row, color:'#ddd'} : styles.row}
+                        key={i}>
                     <div style={styles.namebox}>
                         <div>{order.name}</div>
                         <div style={styles.date}>
@@ -58,6 +61,12 @@ const OrderList = ({fetchOrders, auth, orders}) => {
                             )
                         })}
                     </div>
+                    <div>
+                        <div    onClick={() => {markOrder(order._id)}}
+                                style={styles.toggleOrderButton}>
+                            Mark As {order.processed ? 'UnOrdered':'Ordered'}
+                        </div>
+                    </div>
                 </div>
             )
         }
@@ -67,7 +76,7 @@ const OrderList = ({fetchOrders, auth, orders}) => {
 
 
     return (
-        <div className="">
+        <div style={styles.orderListContainer}>
             {renderOrder()}
         </div>
     );
@@ -79,4 +88,4 @@ const mapStateToProps = ({auth, orders}) => ({
     orders
 });
 	
-export default connect(mapStateToProps, {fetchOrders})(OrderList);
+export default connect(mapStateToProps, {fetchOrders, markOrder})(OrderList);

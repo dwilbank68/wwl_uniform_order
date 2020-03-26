@@ -1,5 +1,5 @@
 import axios from 'axios';
-import {FETCH_ORDERS, FETCH_USER, SUBMIT_ORDER} from './types.js';
+import {FETCH_ORDERS, FETCH_USER, MARK_ORDER, SUBMIT_ORDER} from './types.js';
 
 export const fetchOrders = (isAdmin) => async (dispatch, getState) => {
     let orders = [];
@@ -16,7 +16,10 @@ export const fetchUser = () => async (dispatch, getState) => {
     dispatch({type: FETCH_USER, payload: user.data})
 }
 
-
+export const markOrder = (orderId) => async (dispatch, getState) => {
+    const user = await axios.patch(`/api/orders/${orderId}`);
+    dispatch({type: MARK_ORDER, payload: user.data})
+}
 
 // export const submitSurvey = (values, history) => async dispatch => {
 //     const res = await axios.post('/api/surveys', values);
