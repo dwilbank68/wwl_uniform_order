@@ -49,7 +49,8 @@ module.exports = (app) => {
             let order = await Order.findOne(filter)
             await order.updateOne({processed:!order.processed, dateProcessed: Date.now()})
             await order.save();
-            res.send('order processed');
+            const orders = await Order.find();
+            res.send(orders);
         }
     )
 

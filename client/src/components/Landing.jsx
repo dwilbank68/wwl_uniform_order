@@ -1,57 +1,50 @@
 import React from 'react';
-// import React, {useState, useEffect} from 'react';
-// import PropTypes from 'prop-types';
-// import Foo from './images/foo.png';
+import {Link} from 'react-router-dom';
 
-
-// import $COMPONENT$ from './$COMPONENT$.jsx';
-// const $COMPONENT$ = (props) => {
 const Landing = () => {
 
+    const styles = {
+        newOrderButton: { marginTop:'30px'},
+        landingTextBox: {
+            backgroundColor:'rgba(0,167,135,.5)',
+            color:'white',
+            padding:'0 44px',
+            paddingBottom:'25px',
+            borderRadius:'20px'
+        }
+    }
 
     return (
-        <div    style={{textAlign: 'center'}}>
-            <h1>Emaily</h1>
-            Collect feedback from your users
+        <div>
+            
+            <div className="vimeo-wrapper">
+                <iframe src="https://player.vimeo.com/video/364294932?background=1&autoplay=1&loop=1&byline=0&title=0"
+                        frameBorder="0"
+                        webkitallowfullscreen="true"
+                        mozallowfullscreen="true"
+                        title="wwl_video"
+                        allowFullScreen>
+                </iframe>
+            </div>
+
+            <div    style={{paddingTop:'100px', textAlign: 'center', fontFamily:'Montserrat, sans-serif'}}>
+                <div style={{display:'flex', justifyContent:'center'}}>
+                    <div style={styles.landingTextBox}>
+                        <h1>Uniform Order Hub</h1>
+                        <h3>Order Uniforms & Accessories</h3>
+                    </div>
+                </div>
+
+                <div style={styles.newOrderButton}>
+                    <Link   to="/orders/new"
+                            className="btn-floating btn-large">
+                        <i className="material-icons" style={{fontSize:'50px'}}>add</i>
+                    </Link>
+                </div>
+            </div>
+
         </div>
     );
 };
 
-
-// $COMPONENT$.defaultProps = {};
-// $COMPONENT$.propTypes = {
-//     name:        PropTypes.string.isRequired,
-//     hndleIptChg: PropTypes.func,
-//     id:          PropTypes.oneOfType([ PropTypes.number, PropTypes.string ]).isRequired,
-//     message:     PropTypes.shape({
-//          title: PropTypes.string.isRequired,
-//          text: PropTypes.string.isRequired
-//     }).isRequired,
-//     comments:    PropTypes.arrayOf(PropTypes.object),
-//     todos:       PropTypes.array,
-//     isComplete:  PropTypes.bool,
-//     id:          PropTypes.number,
-//     date:        PropTypes.instanceOf(Date)
-// };
-//
-// PropTypes -> array, bool, func, number, object, string, symbol
-
 export default Landing;
-
-
-///////////////////////////////////// BACKGROUND IMAGE /////////////////////////////////////
-
-// import Foo from './images/foo.png';
-
-// style={{background:`white url(${Foo})`}}
-
-
-///////////////////////////////////// REACT-REVEAL EFFECT /////////////////////////////////////
-
-// import Fade from 'react-reveal/Fade.js';
-// import Slide from 'react-reveal/Slide.js';
-// import Zoom from 'react-reveal/Zoom.js';
-
-// <Fade delay={500}>...</Fade>
-// <Slide left delay={1000}>...</Slide
-// <Zoom delay={foo.delay}>...</Zoom>

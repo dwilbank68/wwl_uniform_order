@@ -8,7 +8,7 @@ const Header = ({auth}) => {
 
     const styles = {
         nav: {position:'absolute', left:'5px', top:'0px'},
-        navbar_gray: {backgroundColor:'#00a787'},
+        navbar_green: {backgroundColor:'#00a787'},
         profilePic: {height:'50px', width:'50px', marginTop:'7px', borderRadius:'5px'}
     }
 
@@ -36,7 +36,7 @@ const Header = ({auth}) => {
     return (
         <nav style={styles.nav}>
             <div    className="nav-wrapper"
-                    style={styles.navbar_gray}>
+                    style={styles.navbar_green}>
                 <Link   to={auth ? '/orders' : '/'}
                         className="left logo"
                         style={{paddingLeft:'15px'}}>             

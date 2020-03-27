@@ -18,6 +18,13 @@ const styles = {
         border: '1px solid #eee',
         fontSize: '11px',
         textAlign: 'center'
+    },
+    TotalBox: {
+        textAlign:'center',
+        height:'36px',
+        fontSize:'14px',
+        fontWeight:'bold',
+        paddingTop:'7px'
     }
 }
 
@@ -59,8 +66,8 @@ export default
             {showTable &&
             <div style={styles.OrderSummary}>
                 <table className="striped">
-                    <thead style={{height:'24px', fontSize:'14px',
-                            backgroundColor:'#CCC', fontFamily:'Montserrat, sans-serif'}}>
+                    <thead style={{height:'24px', fontSize:'14px', color:'white',
+                            backgroundColor:'#00a787', fontFamily:'Montserrat, sans-serif'}}>
                         <tr>
                             <th style={{textAlign:'center'}}>Item</th>
                             <th style={{textAlign:'center'}}>Size</th>
@@ -75,8 +82,15 @@ export default
                     </tbody>
                 </table>
 
-                <div style={{textAlign:'center', height:'36px', fontSize:'14px', fontWeight:'bold', paddingTop:'7px'}}>
-                    Total Points: {total}
+                <div style={styles.TotalBox}>
+                    {total <= 150 ?
+                    <div>Total Points: {total}</div>
+                    :
+                    <div style={{color: 'red'}}>
+                        Total Points: {total} - Overage: {total-150}
+                    </div>    
+                }
+                    
                 </div>
             </div>}
         </div>
