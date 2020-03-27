@@ -16,7 +16,7 @@ const OrderList = ({fetchOrders, markOrder, auth, orders}) => {
     )
     
     const styles = {
-        orderListContainer: {marginTop: '100px', padding:'0 80px'},
+        orderListContainer: {marginTop: '100px', padding:'40px 80px', backgroundColor:'white', borderRadius:'10px'},
         row: {display:'flex', fontFamily: 'Open Sans, sans-serif', borderBottom:'1px solid gray', justifyContent:'space-between', alignItems:'center'},
         rowItem: {display:'flex', fontFamily: 'Open Sans, sans-serif'},
         namebox: {
@@ -43,7 +43,6 @@ const OrderList = ({fetchOrders, markOrder, auth, orders}) => {
                 } else {
                     totalsObj[key] = orderItem[key];
                 }
-                
             }
         }
         
@@ -97,6 +96,8 @@ const OrderList = ({fetchOrders, markOrder, auth, orders}) => {
 
     return (
         <div style={styles.orderListContainer}>
+            <h3>Orders Placed</h3>
+            <h6>(grayed-out orders have been processed and can no longer be changed)</h6>
             {renderOrders()}
             
             {auth && auth.admin && PRODUCTS &&

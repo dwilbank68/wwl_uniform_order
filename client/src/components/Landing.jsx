@@ -16,16 +16,6 @@ const Landing = () => {
 
     return (
         <div>
-            
-            <div className="vimeo-wrapper">
-                <iframe src="https://player.vimeo.com/video/364294932?background=1&autoplay=1&loop=1&byline=0&title=0"
-                        frameBorder="0"
-                        webkitallowfullscreen="true"
-                        mozallowfullscreen="true"
-                        title="wwl_video"
-                        allowFullScreen>
-                </iframe>
-            </div>
 
             <div    style={{paddingTop:'100px', textAlign: 'center', fontFamily:'Montserrat, sans-serif'}}>
                 <div style={{display:'flex', justifyContent:'center'}}>
